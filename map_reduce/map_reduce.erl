@@ -74,7 +74,9 @@ file_reader(Fd, FileName, State) ->
         {error, Error} ->
           file:close(Fd),
           {error, [{filename, FileName},Error]}
-      end
+      end;
+    {error, Reason} ->
+      {error, [{filename, FileName}, Reason]}
   end.
 
 %% Тут есть сложность. Слова AND, And или and считаются разными словами, хотя это одно и то же слово.
